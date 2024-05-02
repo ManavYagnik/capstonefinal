@@ -1,0 +1,81 @@
+---
+Organizations:
+  - &FarmerOrg
+    Name: FarmerOrg
+    ID: FarmerMSP
+    MSPDir: /path/to/farmer/msp
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('FarmerMSP.admin', 'FarmerMSP.peer', 'FarmerMSP.client')"
+      Writers:
+        Type: Signature
+        Rule: "OR('FarmerMSP.admin', 'FarmerMSP.client')"
+      Admins:
+        Type: Signature
+        Rule: "OR('FarmerMSP.admin')"
+      Endorsement:
+        Type: Signature
+        Rule: "OR('FarmerMSP.peer')"
+    AnchorPeers:
+      - Host: peer0.farmerOrg.example.com
+        Port: 7051
+
+  - &RefinersOrg
+    Name: RefinersOrg
+    ID: RefinersMSP
+    MSPDir: /path/to/refiners/msp
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('RefinersMSP.admin', 'RefinersMSP.peer', 'RefinersMSP.client')"
+      Writers:
+        Type: Signature
+        Rule: "OR('RefinersMSP.admin', 'RefinersMSP.client')"
+      Admins:
+        Type: Signature
+        Rule: "OR('RefinersMSP.admin')"
+      Endorsement:
+        Type: Signature
+        Rule: "OR('RefinersMSP.peer')"
+    AnchorPeers:
+      - Host: peer0.refinersOrg.example.com
+        Port: 7051
+
+  # Add similar definitions for packagingOrg, distributorOrg, and retailerOrg
+
+Capabilities:
+  Channel: &ChannelCapabilities
+    V1_4_3: true
+
+Application: &ApplicationCapabilities
+  V1_4_3: true
+
+Orderer: &OrdererDefaults
+  OrdererType: etcdraft
+  EtcdRaft:
+    Consenters:
+    - Host: orderer0.example.com
+      Port: 7050
+      ClientTLSCert: /path/to/orderer/tls.crt
+      ServerTLSCert: /path/to/orderer/tls.crt
+
+Profiles:
+  AgriChainChannel:
+    Consortium: AgriChainConsortium
+    <<: *ChannelCapabilities
+    Application:
+      <<: *ApplicationCapabilities
+      Organizations:
+        - *FarmerOrg
+        - *RefinersOrg
+        # Add other organizations here
+      Capabilities:
+        <<: *ApplicationCapabilities
+
+Consortiums:
+  AgriChainConsortium:
+    Organizations:
+      - *FarmerOrg
+      - *RefinersOrg
+      # Add other organizations here

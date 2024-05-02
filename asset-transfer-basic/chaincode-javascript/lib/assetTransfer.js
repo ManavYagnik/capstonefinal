@@ -7,24 +7,23 @@
 'use strict';
 
 // Deterministic JSON.stringify()
-const stringify  = require('json-stringify-deterministic');
-const sortKeysRecursive  = require('sort-keys-recursive');
+const stringify = require('json-stringify-deterministic');
+const sortKeysRecursive = require('sort-keys-recursive');
 const { Contract } = require('fabric-contract-api');
 
 class AssetTransfer extends Contract {
 
     async InitLedger(ctx) {
-       
+
         const assets = [
             {
-                ProductID: 'frmpdt1',
-                ProductName: 'Wheat',
-                Size: 200,
-                OwnerID: 'Farmer_1',
-                ProductionDate:'28-4-2024',
-                ExpirationDate:'',
-                BatchNumber:2,
-                History:[],
+                ProductID: 'refinepdt1',
+                ProductName: 'processed wheat',
+                Size: 180,
+                OwnerID: 'processor_1',
+                ProductionDate: '2-5-2024',
+                ExpirationDate: '2-5-2027',
+                BatchNumber: 1,
             },
             {
                 ID: 'asset2',
@@ -45,10 +44,10 @@ class AssetTransfer extends Contract {
                 Item: 'Mango',
                 Size: 5,
                 Owner: 'Customer_1',
-                
+
                 AppraisedValue: 600,
             },
-            
+
         ];
 
         for (const asset of assets) {

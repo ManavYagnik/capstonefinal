@@ -1,0 +1,36 @@
+# Chain Creation and Peers Addition
+
+## Chain Creation:
+- Chain Name: AgriChain
+- Creation Date: 2024-05-01
+- Description: A blockchain network for agricultural supply chain management
+
+## Peers Addition:
+- Peer Name: WheatProducerPeer
+  - ID: wheatproducer1
+  - Location: Farm A
+- Peer Name: RefinerPeer
+  - ID: refiner1
+  - Location: Processing Facility B
+
+# Ledger Log for Subchain: Wheat Processing
+
+## Entry 1:
+- ProductID: refinepdt1
+- ProductName: processed wheat
+- Size: 180
+- OwnerID: processor_1
+- ProductionDate: 2-5-2024
+- ExpirationDate: 2-5-2027
+- BatchNumber: 1
+
+## Entry 2:
+- ProductID: refinepdt2
+- ProductName: processed wheat
+- Size: 150
+- OwnerID: processor_2
+- ProductionDate: 3-5-2024
+- ExpirationDate: 3-5-2027
+- BatchNumber: 2
+
+# End of Ledger Log
